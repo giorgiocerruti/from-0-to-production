@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// Main functuion
 func main() {
 	http.HandleFunc("/", RootHandler)
 	http.HandleFunc("/health", HealthHandler)
