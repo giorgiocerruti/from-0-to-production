@@ -1,26 +1,30 @@
 # From 0 to Prod
-From 0 to Prod series project
 
+From 0 to Prod series project
 
 GPT
 Sure, let's create a scenario for a simple 3-tier application written in Go, designed to run as a containerized application. This application will be structured into three layers: the presentation layer (front-end), the business logic layer (application server), and the data storage layer (database).
 
 # Scenario Overview
+
 ## Presentation Layer (Front-end)
 
 ### Technology: A simple Go-based web server.
+
 Role: Serves the user interface and handles user interaction.
 Containerization: Docker container hosting the web server.
 
 ## Business Logic Layer (Application Server)
 
 ### Technology: Go application with REST API.
+
 Role: Processes business logic, handles requests from the front-end, and interacts with the database.
 Containerization: Separate Docker container for the application server.
 
 ## Data Storage Layer (Database)
 
 ### Technology: PostgreSQL database.
+
 Role: Stores and retrieves data required by the application server.
 Containerization: Docker container running PostgreSQL.
 Implementation Steps
@@ -28,6 +32,7 @@ Implementation Steps
 ## Develop the Application
 
 ### Write a Go program for the web server.
+
 Develop a Go application with RESTful services for business logic.
 Set up a PostgreSQL database schema.
 
@@ -69,3 +74,34 @@ Security Considerations
 
 Implement network policies in Kubernetes.
 Use secrets for database credentials.
+
+# Docker
+
+## Build the image
+
+```
+docker build -t <container-name>:<tag> .
+```
+
+## Run a container
+
+```
+ docker run -p <host-port>:<container-port> <image-name>:<tag> [command if you want]
+```
+
+## Push a Docker imags
+
+```
+docker push <registry>\<image-name>:<tag>
+```
+
+## Pull the image from registry
+
+```
+docker pull <registry>\<image-name>:<tag>
+```
+
+## See the hystory of the image
+````
+docker hystory <image-name>
+````
