@@ -1,31 +1,21 @@
 FROM golang:latest as builder
 
-EXPOSE 8080
+RUN mkdir /application
+WORKDIR /application
 
-#Make a directory
-RUN mkdir /app
-#Add source code to the directory
-ADD ./application /app
-#Set the working directory
-WORKDIR /app
-#Build the application
-RUN go build -o main .
+COPY ./application .
 
+RUN go build -o app .
 
-FROM golang:latest as production
+FROM golang:latest as prod
 
-#Make a directory
-RUN mkdir /app
+RUN mkdir /application
 
-#Create a user
 RUN useradd --user-group --system --create-home --no-log-init app
-#Set the default user
 USER app
-#Copy the binary file from builder to production
-COPY --from=builder --chown=app:app /app/main /app/main
 
-WORKDIR /app
+COPY --from=builder --chown=app:app /application/app /application/app
 
-#Expose the port
-CMD ["./main"]
+WORKDIR /application
 
+CMD [ "./app" ]
